@@ -34,7 +34,7 @@ def main(uploader_project, output_file):
             it = line.strip().split('\t')
             locations[it[0]] = it[1]
     
-    reads = arvados.util.list_all(api.collections().list, filters=[["owner_uuid", "=", uploader_project]])
+    reads = [] # arvados.util.list_all(api.collections().list, filters=[["owner_uuid", "=", uploader_project]])
     subprojects = arvados.util.list_all(api.groups().list, filters=[["owner_uuid", "=", uploader_project]])
     for sp in subprojects:
         subreads = arvados.util.list_all(api.collections().list, filters=[["owner_uuid", "=", sp['uuid']]])
