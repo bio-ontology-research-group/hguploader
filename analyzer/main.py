@@ -149,7 +149,7 @@ def main(uploader_project, workflows_project, fasta_workflow_uuid, pangenome_wor
     state = {}
     if os.path.exists('state.json'):
         state = json.loads(open('state.json').read())
-    reads = arvados.util.list_all(api.collections().list, filters=[["owner_uuid", "=", uploader_project]])
+    reads = [] # arvados.util.list_all(api.collections().list, filters=[["owner_uuid", "=", uploader_project]])
     subprojects = arvados.util.list_all(api.groups().list, filters=[["owner_uuid", "=", uploader_project]])
     for sp in subprojects:
         subreads = arvados.util.list_all(api.collections().list, filters=[["owner_uuid", "=", sp['uuid']]])

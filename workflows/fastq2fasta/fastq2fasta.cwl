@@ -4,7 +4,7 @@ requirements:
   SubworkflowFeatureRequirement: {}
   InlineJavascriptRequirement: {}
   ResourceRequirement:
-    ramMin: 3000
+    ramMin: 8000
 
 inputs:
   fastq_forward: File
