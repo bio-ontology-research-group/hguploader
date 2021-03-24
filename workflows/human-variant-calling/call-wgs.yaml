@@ -1,0 +1,37 @@
+details:
+  - files:
+    - ERR194147_1.fastq.gz
+    - ERR194147_2.fastq.gz
+    description: NA12878-PLATINUM
+    metadata:
+      sex: female
+    analysis: variant2
+    genome_build: hg38
+    # to do multi-sample variant calling, assign samples the same metadata / batch
+    # metadata:
+    #   batch: your-arbitrary-batch-name
+    algorithm:
+      aligner: bwa
+      recalibrate: false
+      realign: false
+      remove_lcr: true
+      mark_duplicates: true
+      variantcaller: gatk-haplotype
+      svcaller: [lumpy, manta]
+      svprioritize: prioritize/actionable/ACMG56.bed
+      tools_on: [gatk4]
+      effects: false
+resources:
+  default:
+    cores: 4
+    memory: 4G
+    jvm_opts: [-Xms750m, -Xmx3500m]
+  bwa:
+    cores: 16
+    memory: 4G
+  samtools:
+    cores: 16
+    memory: 8G
+  gatk:
+    jvm_opts: ["-Xms2g", "-Xmx4g"]
+    memory: 8G
