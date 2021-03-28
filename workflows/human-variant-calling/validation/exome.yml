@@ -1,0 +1,39 @@
+details:
+  - files:
+    - SRR1611183.1_1.fastq.gz
+    - SRR1611183.1_2.fastq.gz
+    description: NA12878
+    metadata:
+      sex: female
+      batch: batch1
+      phenotype: normal
+    analysis: variant2
+    genome_build: hg38
+    algorithm:
+      aligner: bwa
+      variantcaller: gatk-haplotype
+      variant_regions: hglft_genome_4a46c_ca1130.bed
+      sv_regions: hglft_genome_4a46c_ca1130.bed
+      remove_lcr: true
+      validate: giab-NA12878/truth_small_variants.vcf.gz
+      validate_regions: giab-NA12878/truth_regions.bed
+      svcaller: [lumpy, manta]
+      svprioritize: prioritize/actionable/ACMG56.bed
+      vcfanno:
+        - gemini
+      tools_on:
+        - gemini
+resources:
+  default:
+    cores: 8
+    memory: 4G
+    jvm_opts: [-Xms750m, -Xmx3000m]
+  bwa:
+    cores: 16
+    memory: 4G
+  samtools:
+    cores: 16
+    memory: 8G
+  gatk:
+    jvm_opts: ["-Xms2g", "-Xmx4g"]
+    memory: 8G
