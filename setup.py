@@ -32,7 +32,7 @@ needs_pytest = {"pytest", "test", "ptr"}.intersection(sys.argv)
 pytest_runner = ["pytest < 6", "pytest-runner < 5"] if needs_pytest else []
 
 setup(
-    name="cborguploader",
+    name="hguploader",
     version="1.0",
     description="CBRC/BORG sequence uploader",
     long_description=open(README).read(),
@@ -40,12 +40,11 @@ setup(
     author="Maxat Kulmanov",
     author_email="maxat.kulmanov@kaust.edu.sa",
     license="Apache 2.0",
-    packages=["cborguploader",],
-    package_data={"cborguploader": ["schema.yml",
+    packages=["hguploader",],
+    package_data={"hguploader": ["schema.yml",
                                       "options.yml",
                                       "shex.rdf",
-                                      "validation/formats",
-                                      "SARS-CoV-2-reference.fasta",],
+                                      "validation/formats",],
     },
     install_requires=install_requires,
     extras_require={},
@@ -53,7 +52,7 @@ setup(
     tests_require=["pytest<5"],
     entry_points={
         "console_scripts": [
-            "cborguploader=cborguploader.main:main",
+            "hguploader=hguploader.main:main",
         ]
     },
     zip_safe=True,
