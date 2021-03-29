@@ -49,12 +49,12 @@ def validate_fasta(fasta_file):
 def validate_metadata(metadata_file):
     schema_resource = pkg_resources.resource_stream(__name__, "schema.yml")
     cache = {
-        "https://raw.githubusercontent.com/bio-ontology-research-group/cborguploader/master/cborguploader/schema.yml": schema_resource.read().decode("utf-8")}
+        "https://raw.githubusercontent.com/bio-ontology-research-group/hguploader/master/hguploader/schema.yml": schema_resource.read().decode("utf-8")}
     (document_loader,
      avsc_names,
      schema_metadata,
      metaschema_loader) = schema_salad.schema.load_schema(
-         "https://raw.githubusercontent.com/bio-ontology-research-group/cborguploader/master/cborguploader/schema.yml",
+         "https://raw.githubusercontent.com/bio-ontology-research-group/hguploader/master/hguploader/schema.yml",
          cache=cache)
 
     shex = pkg_resources.resource_stream(
@@ -70,7 +70,7 @@ def validate_metadata(metadata_file):
         g = schema_salad.jsonld_context.makerdf("workflow", doc, document_loader.ctx)
         rslt, reason = evaluate(
             g, shex, doc["id"],
-            "https://raw.githubusercontent.com/bio-ontology-research-group/cborguploader/master/cborguploader/shex.rdf#submissionShape")
+            "https://raw.githubusercontent.com/bio-ontology-research-group/hguploader/master/hguploader/shex.rdf#submissionShape")
 
         if not rslt:
             print(reason)
