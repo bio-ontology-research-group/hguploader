@@ -116,14 +116,14 @@ def main(uploader_project, sequence_fasta, sequence_read1, sequence_read2,
     upload_file(col, metadata_file, 'metadata.yaml')
     
     properties = {
-        "sequence_label": metadata['sample']['sample_id'],
-        "upload_app": "cborguploader",
+        "id": metadata['id'],
+        "upload_app": "hguploader",
         "is_fasta": is_fasta,
         "is_paired": is_paired
     }
 
     col.save_new(
-        owner_uuid=uploader_project, name=metadata['sample']['sample_id'],
+        owner_uuid=uploader_project, name=metadata['id'],
         properties=properties, ensure_unique_name=True)
     response = col.api_response()
     print(json.dumps(response))
