@@ -84,26 +84,22 @@ def validate_metadata(metadata_file):
 @ck.command()
 @ck.option(
     '--uploader-project', '-up', required=True,
-    help='COVID19 FASTA/FASTQ sequences project uuid')
-@ck.option('--sequence-fasta', '-sf', help='FASTA File (*.fasta). FASTQ files are ignored if FASTA file is provided')
-@ck.option('--sequence-read1', '-sr1', help='FASTQ File (*.fastq) read 1')
+    help='FASTQ sequences project uuid')
+@ck.option('--sequence-read1', '-sr1', required=True, help='FASTQ File (*.fastq) read 1')
 @ck.option('--sequence-read2', '-sr2', help='FASTQ File (*.fastq) read 2')
+@ck.option('--bed-file', '-bf', help='BED file for exome uploads')
 @ck.option('--metadata-file', '-m', required=True, help='METADATA File')
 @ck.option('--no-sync', '-ns', is_flag=True)
-def main(uploader_project, sequence_fasta, sequence_read1, sequence_read2,
+def main(uploader_project, sequence_read1, sequence_read2, bed_file,
          metadata_file, no_sync):
     if not validate_metadata(metadata_file):
         return
     metadata = yaml.load(open(metadata_file), Loader=yaml.FullLoader)
     api = arvados.api('v1', host=ARVADOS_API_HOST, token=ARVADOS_API_TOKEN)
     col = arvados.collection.Collection(api_client=api, num_retries=5)
-    is_fasta = False
+    is_exome = False
     is_paired = False
-    if sequence_fasta is not None:
-        validate_fasta(sequence_fasta)
-        upload_file(col, sequence_fasta, 'sequence.fasta')
-        is_fasta = True
-    elif sequence_read1 is not None:
+    if sequence_read1 is not None:
         validate_fastq(sequence_read1)
         upload_file(col, sequence_read1, 'reads1.fastq')
         if sequence_read2 is not None:
@@ -111,14 +107,18 @@ def main(uploader_project, sequence_fasta, sequence_read1, sequence_read2,
             upload_file(col, sequence_read2, 'reads2.fastq')
             is_paired = True
     else:
-        raise ck.UsageError('Please provide at least a FASTA file or FASTQ reads')
+        raise ck.UsageError('Please provide at least one FASTQ file')
 
+    if bed_file is not None:
+        is_exome = True
+        upload_file(col, bed_file, 'sequence.bed')
+    
     upload_file(col, metadata_file, 'metadata.yaml')
     
     properties = {
         "id": metadata['id'],
         "upload_app": "hguploader",
-        "is_fasta": is_fasta,
+        "is_exome": is_exome,
         "is_paired": is_paired
     }
 
@@ -132,7 +132,7 @@ def main(uploader_project, sequence_fasta, sequence_read1, sequence_read2,
         data = {
             'token': ARVADOS_API_TOKEN,
             'col_uuid': col_uuid,
-            'is_fasta': is_fasta,
+            'is_exome': is_exome,
             'is_paired': is_paired,
             'status': 'uploaded'
         }
