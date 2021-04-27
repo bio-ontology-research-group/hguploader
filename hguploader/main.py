@@ -105,7 +105,7 @@ def main(uploader_project, sequence_read1, sequence_read2, bed_file,
 
     if bed_file is not None:
         is_exome = True
-        upload_file(col, bed_file, 'sequence.bed.gz')
+        upload_file(col, bed_file, 'variant_regions.bed')
     
     upload_file(col, metadata_file, 'metadata.yaml')
     

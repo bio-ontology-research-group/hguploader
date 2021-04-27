@@ -67,13 +67,23 @@ def submit_new_request(
     }
     inputobj["files"].append({
         "class": "File",
-        "location": "keep:%s/reads1.fastq.gz" % portable_data_hash
+        "path": "keep:%s/reads1.fastq.gz" % portable_data_hash
     })
     if is_paired:
         inputobj["files"].append({
             "class": "File",
-            "location": "keep:%s/reads2.fastq.gz" % portable_data_hash
+            "path": "keep:%s/reads2.fastq.gz" % portable_data_hash
         })
+
+    if is_exome:
+        inputobj["config__algorithm__variant_regions"] = [{
+            "class": "File",
+            "path": "keep:%s/variant_regions.bed" % portable_data_hash
+        }]
+        inputobj["config__algorithm__sv_regions"] = [{
+            "class": "File",
+            "path": "keep:%s/variant_regions.bed" % portable_data_hash
+        }]
     
     name = f'Generate FASTA for {sample_id}'
     project, proc = run_workflow(
