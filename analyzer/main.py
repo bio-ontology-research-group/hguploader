@@ -65,12 +65,17 @@ def submit_new_request(
     inputobj = {
         "files": []
     }
-    inputobj["files"].append({
-        "class": "File",
-        "path": "keep:%s/reads1.fastq.gz" % portable_data_hash
-    })
+    inputobj= {
+        "files": [
+            [
+                {
+                    "class": "File",
+                    "path": "keep:%s/reads1.fastq.gz" % portable_data_hash
+                }
+            ]
+        ]
     if is_paired:
-        inputobj["files"].append({
+        inputobj["files"][0].append({
             "class": "File",
             "path": "keep:%s/reads2.fastq.gz" % portable_data_hash
         })
