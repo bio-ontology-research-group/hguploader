@@ -34,7 +34,7 @@ def upload_file(col, filename_local, filename_remote):
     lf.close()
 
 def validate_fastq(fastq_file):
-    with gzip.open(fastq_file, 'r') as f:
+    with gzip.open(fastq_file, 'rt') as f:
         for record in SeqIO.parse(f, 'fastq'):
             pass
     return True
