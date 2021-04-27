@@ -61,23 +61,20 @@ def get_cr_state(api, cr):
 
 def submit_new_request(
         api, workflows_project, workflow_uuid, sample_id,
-        portable_data_hash, is_paired):
+        portable_data_hash, is_paired, is_exome):
     inputobj = {
-        "ref_fasta": {
-            "class": "File",
-            "location": "keep:9df5dcc0054bfc9e588f1273e9974c72+474/NC_045512.2.fasta"
-        },
-        "sample_id": sample_id
+        "files": []
     }
-    inputobj["fastq_forward"] = {
+    inputobj["files"].append({
         "class": "File",
-        "location": "keep:%s/reads1.fastq" % portable_data_hash
-    }
+        "location": "keep:%s/reads1.fastq.gz" % portable_data_hash
+    })
     if is_paired:
-        inputobj["fastq_reverse"] = {
+        inputobj["files"].append({
             "class": "File",
-            "location": "keep:%s/reads2.fastq" % portable_data_hash
-        }
+            "location": "keep:%s/reads2.fastq.gz" % portable_data_hash
+        })
+    
     name = f'Generate FASTA for {sample_id}'
     project, proc = run_workflow(
         api, workflows_project, workflow_uuid, name, inputobj)
@@ -94,56 +91,14 @@ def submit_new_request(
     return container_request, status
 
 
-def submit_pangenome(
-        api, workflows_project, pangenome_workflow_uuid, data):
-    inputobj = {
-        "gff_files": [],
-        "reference": {
-            "class": "File",
-            "location": "keep:1630555a9f4d1d70d5bc19ac5f1d6800+133/reference.fasta"
-        },
-        "reference_gb": {
-            "class": "File",
-            "location": "keep:1630555a9f4d1d70d5bc19ac5f1d6800+133/reference.gb"
-        },
-        "metadata": {
-            "class": "File",
-            "location": "keep:e5c2e53119ea3aa1d0a2fd44de1d1a69+60/metadata.tsv"
-        },
-        "dirs": [],
-    }
-    for s_id, pdh in data:
-        inputobj["gff_files"].append({
-            "class": "File",
-            "location": f'keep:{pdh}/{s_id}.gff'})
-        inputobj["dirs"].append({
-            "class": "Directory",
-            "location": f'keep:{pdh}/{s_id}'})
-    
-    name = f'Pangenome analysis for'
-    project, proc = run_workflow(
-        api, workflows_project, pangenome_workflow_uuid, name, inputobj)
-    status = 'error'
-    container_request = None
-    if proc.returncode != 0:
-        logging.error(proc.stderr.decode('utf-8'))
-    else:
-        output = proc.stderr.decode('utf-8')
-        lines = output.splitlines()
-        if lines[-2].find('container_request') != -1:
-            container_request = lines[-2].split()[-1]
-            status = 'submitted'
-    return container_request, status
-
-
     
 @ck.command()
-@ck.option('--uploader-project', '-up', default='cborg-j7d0g-nyah4ques5ww7pk', help='Uploader project uuid')
-@ck.option('--workflows-project', '-wp', default='cborg-j7d0g-3yx09joxonkhbru', help='Workflows project uuid')
-@ck.option('--fasta-workflow-uuid', '-mwid', default='cborg-7fd4e-zzk6vpo8d1k9zea', help='FASTQ2FASTA workflow uuid')
-@ck.option('--pangenome-workflow-uuid', '-pwid', default='cborg-7fd4e-7zy0h7uhizql6vb', help='Pangenome workflow uuid')
-@ck.option('--pangenome-result-col-uuid', '-prcid', default='cborg-4zz18-7hurjl2943atdoz', help='Pangenome results collection uuid')
-def main(uploader_project, workflows_project, fasta_workflow_uuid, pangenome_workflow_uuid, pangenome_result_col_uuid):    
+@ck.option('--uploader-project', '-up', default='cborg-j7d0g-20hfcsh2q2269gf', help='Uploader project uuid')
+@ck.option('--workflows-project', '-wp', default='cborg-j7d0g-yqf13st3gfnlydg', help='Workflows project uuid')
+@ck.option('--wgs-workflow-uuid', '-wgs', default='cborg-7fd4e-ya7ogrz152z19ry', help='Whole genome workflow uuid')
+@ck.option('--wes-workflow-uuid', '-wes', default='cborg-7fd4e-ldc7wy1xx6oca42', help='Whole exome workflow uuid')
+@ck.option('--trio-workflow-uuid', '-trio', default='cborg-7fd4e-rke71pmedcc4k97', help='Trio workflow uuid')
+def main(uploader_project, workflows_project, wgs_workflow_uuid, wes_workflow_uuid, trio_workflow_uuid):  
     api = arvados.api('v1', host=ARVADOS_API_HOST, token=ARVADOS_API_TOKEN)
     col = arvados.collection.Collection(api_client=api)
     state = {}
@@ -154,16 +109,13 @@ def main(uploader_project, workflows_project, fasta_workflow_uuid, pangenome_wor
     for sp in subprojects:
         subreads = arvados.util.list_all(api.collections().list, filters=[["owner_uuid", "=", sp['uuid']]])
         reads += subreads
-    update_pangenome = False
-    pangenome_data = []
     print('Total number of uploaded sequences:', len(reads))
     for it in reads:
         col = api.collections().get(uuid=it['uuid']).execute()
-        if 'sequence_label' not in it['properties']:
+        if 'id' not in it['properties']:
             continue
-        sample_id = it['properties']['sequence_label']
-        if 'analysis_status' in it['properties']:
-            pangenome_data.append((sample_id, col['portable_data_hash']))
+        sample_id = it['properties']['id']
+        if 'analysis_complete' in it['properties']:
             continue
         if sample_id not in state:
             state[sample_id] = {
@@ -172,13 +124,20 @@ def main(uploader_project, workflows_project, fasta_workflow_uuid, pangenome_wor
                 'output_collection': None,
             }
         sample_state = state[sample_id]
-        if sample_state['status'] == 'new' and not it['properties']['is_fasta']:
+        if sample_state['status'] == 'new':
+            if it['properties']['is_exome']:
+                workflow_uuid = wes_workflow_uuid
+            else:
+                workflow_uuid = wgs_workflow_uuid
+                
             container_request, status = submit_new_request(
-                api, workflows_project, fasta_workflow_uuid, sample_id,
-                it['portable_data_hash'], it['properties']['is_paired'])
+                api, workflows_project, workflow_uuid, sample_id,
+                it['portable_data_hash'], it['properties']['is_paired'],
+                it['properties']['is_exome'])
             sample_state['status'] = status
             sample_state['container_request'] = container_request
             print(f'Submitted analysis request for {sample_id}')
+                
         elif sample_state['status'] == 'submitted':
             # TODO: check container request status
             if sample_state['container_request'] is None:
@@ -192,13 +151,10 @@ def main(uploader_project, workflows_project, fasta_workflow_uuid, pangenome_wor
                 sample_state['output_collection'] = cr["output_uuid"]
                 sample_state['status'] = 'complete'
                 # Copy output files to reads collection
-                it['properties']['analysis_status'] = 'complete'
+                it['properties']['analysis_complete'] = True
                 api.collections().update(
                     uuid=it['uuid'],
-                    body={"manifest_text": col["manifest_text"] + out_col["manifest_text"],
-                          "properties": it["properties"]}).execute()
-                pangenome_data.append((sample_id, col['portable_data_hash']))
-                # update_pangenome = True
+                    body={"properties": it["properties"]}).execute()
             elif cr_state == 'Failed':
                 state[sample_id] = {
                     'status': 'new',
@@ -209,25 +165,6 @@ def main(uploader_project, workflows_project, fasta_workflow_uuid, pangenome_wor
         elif sample_state['status'] == 'complete':
             # TODO: do nothing
             pass
-    if update_pangenome:
-        container_request, status = submit_pangenome(api, workflows_project, pangenome_workflow_uuid, pangenome_data)
-        if status == 'submitted':
-            state['last_pangenome_request'] = container_request
-            state['last_pangenome_request_status'] = 'submitted'
-            print('Submitted pangenome request', container_request)
-    elif 'last_pangenome_request' in state:
-        cr = api.container_requests().get(
-            uuid=state["last_pangenome_request"]).execute()
-        cr_state = get_cr_state(api, cr)
-        print(f'Container request for pangenome workflow is {cr_state}')
-        if state['last_pangenome_request_status'] == 'submitted' and cr_state == 'Complete':
-            print('Updating results collection')
-            out_col = api.collections().get(uuid=cr["output_uuid"]).execute()
-            api.collections().update(
-                uuid=pangenome_result_col_uuid,
-                body={"manifest_text": out_col["manifest_text"]}).execute()
-            state['last_pangenome_request_status'] = 'complete'
-
     
     with open('state.json', 'w') as f:
         f.write(json.dumps(state))

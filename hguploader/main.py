@@ -34,14 +34,8 @@ def upload_file(col, filename_local, filename_remote):
     lf.close()
 
 def validate_fastq(fastq_file):
-    with open(fastq_file, 'r') as f:
+    with gzip.open(fastq_file, 'r') as f:
         for record in SeqIO.parse(f, 'fastq'):
-            pass
-    return True
-
-def validate_fasta(fasta_file):
-    with open(fasta_file, 'r') as f:
-        for record in SeqIO.parse(f, 'fasta'):
             pass
     return True
 
@@ -85,8 +79,8 @@ def validate_metadata(metadata_file):
 @ck.option(
     '--uploader-project', '-up', required=True,
     help='FASTQ sequences project uuid')
-@ck.option('--sequence-read1', '-sr1', required=True, help='FASTQ File (*.fastq) read 1')
-@ck.option('--sequence-read2', '-sr2', help='FASTQ File (*.fastq) read 2')
+@ck.option('--sequence-read1', '-sr1', required=True, help='FASTQ File (*.fastq.gz) read 1')
+@ck.option('--sequence-read2', '-sr2', help='FASTQ File (*.fastq.gz) read 2')
 @ck.option('--bed-file', '-bf', help='BED file for exome uploads')
 @ck.option('--metadata-file', '-m', required=True, help='METADATA File')
 @ck.option('--no-sync', '-ns', is_flag=True)
@@ -101,17 +95,17 @@ def main(uploader_project, sequence_read1, sequence_read2, bed_file,
     is_paired = False
     if sequence_read1 is not None:
         validate_fastq(sequence_read1)
-        upload_file(col, sequence_read1, 'reads1.fastq')
+        upload_file(col, sequence_read1, 'reads1.fastq.gz')
         if sequence_read2 is not None:
             validate_fastq(sequence_read2)
-            upload_file(col, sequence_read2, 'reads2.fastq')
+            upload_file(col, sequence_read2, 'reads2.fastq.gz')
             is_paired = True
     else:
         raise ck.UsageError('Please provide at least one FASTQ file')
 
     if bed_file is not None:
         is_exome = True
-        upload_file(col, bed_file, 'sequence.bed')
+        upload_file(col, bed_file, 'sequence.bed.gz')
     
     upload_file(col, metadata_file, 'metadata.yaml')
     
