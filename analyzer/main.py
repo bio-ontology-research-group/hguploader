@@ -62,9 +62,6 @@ def get_cr_state(api, cr):
 def submit_new_request(
         api, workflows_project, workflow_uuid, sample_id,
         portable_data_hash, is_paired, is_exome):
-    inputobj = {
-        "files": []
-    }
     inputobj= {
         "files": [
             [
@@ -74,6 +71,7 @@ def submit_new_request(
                 }
             ]
         ]
+    }
     if is_paired:
         inputobj["files"][0].append({
             "class": "File",
