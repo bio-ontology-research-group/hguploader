@@ -18,7 +18,7 @@ from rdflib import Graph, Namespace
 from pyshex.evaluate import evaluate
 import logging
 import requests
-from qc_fastq import qc_fastq
+from .qc_fastq import qc_fastq
 
 ARVADOS_API_HOST = os.environ.get('ARVADOS_API_HOST', 'cborg.cbrc.kaust.edu.sa')
 ARVADOS_API_TOKEN = os.environ.get('ARVADOS_API_TOKEN', '')
