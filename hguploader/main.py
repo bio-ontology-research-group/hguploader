@@ -18,7 +18,7 @@ from rdflib import Graph, Namespace
 from pyshex.evaluate import evaluate
 import logging
 import requests
-
+from qc_fastq import qc_fastq
 
 ARVADOS_API_HOST = os.environ.get('ARVADOS_API_HOST', 'cborg.cbrc.kaust.edu.sa')
 ARVADOS_API_TOKEN = os.environ.get('ARVADOS_API_TOKEN', '')
@@ -34,9 +34,11 @@ def upload_file(col, filename_local, filename_remote):
     lf.close()
 
 def validate_fastq(fastq_file):
-    with gzip.open(fastq_file, 'rt') as f:
-        for record in SeqIO.parse(f, 'fastq'):
-            pass
+    try:
+        with gzip.open(fastq_file) as f:
+            qc_fastq(f)
+    except Exception as e:
+        return False
     return True
 
 
