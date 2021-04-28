@@ -128,8 +128,6 @@ def main(uploader_project, workflows_project, wgs_workflow_uuid, wes_workflow_uu
         if 'id' not in it['properties']:
             continue
         sample_id = it['properties']['id']
-        if 'analysis_complete' in it['properties']:
-            continue
         if sample_id not in state:
             state[sample_id] = {
                 'status': 'new',
@@ -165,6 +163,7 @@ def main(uploader_project, workflows_project, wgs_workflow_uuid, wes_workflow_uu
                 sample_state['status'] = 'complete'
                 # Copy output files to reads collection
                 it['properties']['analysis_complete'] = True
+                it['properties']['output_collection'] = cr["output_uuid"]
                 api.collections().update(
                     uuid=it['uuid'],
                     body={"properties": it["properties"]}).execute()
