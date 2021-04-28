@@ -13,7 +13,9 @@ import socket
 import subprocess
 import tempfile
 import logging
-
+import traceback
+import sys
+import time
 
 ARVADOS_API_HOST = os.environ.get('ARVADOS_API_HOST', 'cborg.cbrc.kaust.edu.sa')
 ARVADOS_API_TOKEN = os.environ.get('ARVADOS_API_TOKEN', '')
@@ -117,69 +119,74 @@ def main(uploader_project, workflows_project, wgs_workflow_uuid, wes_workflow_uu
     state = {}
     if os.path.exists('state.json'):
         state = json.loads(open('state.json').read())
-    reads = [] # arvados.util.list_all(api.collections().list, filters=[["owner_uuid", "=", uploader_project]])
-    subprojects = arvados.util.list_all(api.groups().list, filters=[["owner_uuid", "=", uploader_project]])
-    for sp in subprojects:
-        subreads = arvados.util.list_all(api.collections().list, filters=[["owner_uuid", "=", sp['uuid']]])
-        reads += subreads
-    print('Total number of uploaded sequences:', len(reads))
-    for it in reads:
-        col = api.collections().get(uuid=it['uuid']).execute()
-        if 'id' not in it['properties']:
-            continue
-        sample_id = it['properties']['id']
-        if sample_id not in state:
-            state[sample_id] = {
-                'status': 'new',
-                'container_request': None,
-                'output_collection': None,
-            }
-        sample_state = state[sample_id]
-        if sample_state['status'] == 'new':
-            if it['properties']['is_exome']:
-                workflow_uuid = wes_workflow_uuid
-            else:
-                workflow_uuid = wgs_workflow_uuid
-                
-            container_request, status = submit_new_request(
-                api, workflows_project, workflow_uuid, sample_id,
-                it['portable_data_hash'], it['properties']['is_paired'],
-                it['properties']['is_exome'])
-            sample_state['status'] = status
-            sample_state['container_request'] = container_request
-            print(f'Submitted analysis request for {sample_id}')
-                
-        elif sample_state['status'] == 'submitted':
-            # TODO: check container request status
-            if sample_state['container_request'] is None:
-                raise Exception("Container request cannot be empty when status is submitted")
-            cr = api.container_requests().get(
-                uuid=sample_state["container_request"]).execute()
-            cr_state = get_cr_state(api, cr)
-            print(f'Container request for {sample_id} is {cr_state}')
-            if cr_state == 'Complete':
-                out_col = api.collections().get(uuid=cr["output_uuid"]).execute()
-                sample_state['output_collection'] = cr["output_uuid"]
-                sample_state['status'] = 'complete'
-                # Copy output files to reads collection
-                it['properties']['analysis_complete'] = True
-                it['properties']['output_collection'] = cr["output_uuid"]
-                api.collections().update(
-                    uuid=it['uuid'],
-                    body={"properties": it["properties"]}).execute()
-            elif cr_state == 'Failed':
-                state[sample_id] = {
-                    'status': 'new',
-                    'container_request': None,
-                    'output_collection': None,
-        
-                }
-        elif sample_state['status'] == 'complete':
-            # TODO: do nothing
-            pass
-    
-    with open('state.json', 'w') as f:
-        f.write(json.dumps(state))
+    while True:
+        try:
+            reads = [] # arvados.util.list_all(api.collections().list, filters=[["owner_uuid", "=", uploader_project]])
+            subprojects = arvados.util.list_all(api.groups().list, filters=[["owner_uuid", "=", uploader_project]])
+            for sp in subprojects:
+                subreads = arvados.util.list_all(api.collections().list, filters=[["owner_uuid", "=", sp['uuid']]])
+                reads += subreads
+            print('Total number of uploaded sequences:', len(reads))
+            for it in reads:
+                col = api.collections().get(uuid=it['uuid']).execute()
+                if 'id' not in it['properties']:
+                    continue
+                sample_id = it['properties']['id']
+                if sample_id not in state:
+                    state[sample_id] = {
+                        'status': 'new',
+                        'container_request': None,
+                        'output_collection': None,
+                    }
+                sample_state = state[sample_id]
+                if sample_state['status'] == 'new':
+                    if it['properties']['is_exome']:
+                        workflow_uuid = wes_workflow_uuid
+                    else:
+                        workflow_uuid = wgs_workflow_uuid
+
+                    container_request, status = submit_new_request(
+                        api, workflows_project, workflow_uuid, sample_id,
+                        it['portable_data_hash'], it['properties']['is_paired'],
+                        it['properties']['is_exome'])
+                    sample_state['status'] = status
+                    sample_state['container_request'] = container_request
+                    print(f'Submitted analysis request for {sample_id}')
+
+                elif sample_state['status'] == 'submitted':
+                    # TODO: check container request status
+                    if sample_state['container_request'] is None:
+                        raise Exception("Container request cannot be empty when status is submitted")
+                    cr = api.container_requests().get(
+                        uuid=sample_state["container_request"]).execute()
+                    cr_state = get_cr_state(api, cr)
+                    print(f'Container request for {sample_id} is {cr_state}')
+                    if cr_state == 'Complete':
+                        out_col = api.collections().get(uuid=cr["output_uuid"]).execute()
+                        sample_state['output_collection'] = cr["output_uuid"]
+                        sample_state['status'] = 'complete'
+                        # Copy output files to reads collection
+                        it['properties']['analysis_complete'] = True
+                        it['properties']['output_collection'] = cr["output_uuid"]
+                        api.collections().update(
+                            uuid=it['uuid'],
+                            body={"properties": it["properties"]}).execute()
+                    elif cr_state == 'Failed':
+                        state[sample_id] = {
+                            'status': 'new',
+                            'container_request': None,
+                            'output_collection': None,
+
+                        }
+                elif sample_state['status'] == 'complete':
+                    # TODO: do nothing
+                    pass
+        except Exception as e:
+            traceback.print_exc(file=sys.stdout)
+
+        with open('state.json', 'w') as f:
+            f.write(json.dumps(state))
+        time.sleep(300)
 
 
 if __name__ == '__main__':
