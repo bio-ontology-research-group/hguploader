@@ -22,7 +22,7 @@ import requests
 
 ARVADOS_API_HOST = os.environ.get('ARVADOS_API_HOST', 'cborg.cbrc.kaust.edu.sa')
 ARVADOS_API_TOKEN = os.environ.get('ARVADOS_API_TOKEN', '')
-UPLOADER_URL = os.environ.get('UPLOADER_URL', 'https://upload.cborg.cbrc.kaust.edu.sa')
+UPLOADER_URL = os.environ.get('UPLOADER_URL', 'https://hgupload.cbrc.kaust.edu.sa')
 
 def upload_file(col, filename_local, filename_remote):
     lf = open(filename_local, 'rb')
@@ -84,8 +84,9 @@ def validate_metadata(metadata_file):
 @ck.option('--bed-file', '-bf', help='BED file for exome uploads')
 @ck.option('--metadata-file', '-m', required=True, help='METADATA File')
 @ck.option('--no-sync', '-ns', is_flag=True)
+@ck.option('--upload-id', '-ui', help="Upload object id")
 def main(uploader_project, sequence_read1, sequence_read2, bed_file,
-         metadata_file, no_sync):
+         metadata_file, no_sync, upload_id):
     if not validate_metadata(metadata_file):
         return
     metadata = yaml.load(open(metadata_file), Loader=yaml.FullLoader)
@@ -108,16 +109,18 @@ def main(uploader_project, sequence_read1, sequence_read2, bed_file,
         upload_file(col, bed_file, 'variant_regions.bed')
     
     upload_file(col, metadata_file, 'metadata.yaml')
-    
+    sample_id = metadata['id']
+    if upload_id:
+        sample_id += f'_{upload_id}'
     properties = {
-        "id": metadata['id'],
+        "id": sample_id,
         "upload_app": "hguploader",
         "is_exome": is_exome,
         "is_paired": is_paired
     }
 
     col.save_new(
-        owner_uuid=uploader_project, name=metadata['id'],
+        owner_uuid=uploader_project, name=sample_id,
         properties=properties, ensure_unique_name=True)
     response = col.api_response()
     print(json.dumps(response))
