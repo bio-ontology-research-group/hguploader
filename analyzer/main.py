@@ -172,12 +172,7 @@ def main(uploader_project, workflows_project, wgs_workflow_uuid, wes_workflow_uu
                             uuid=it['uuid'],
                             body={"properties": it["properties"]}).execute()
                     elif cr_state == 'Failed':
-                        state[sample_id] = {
-                            'status': 'new',
-                            'container_request': None,
-                            'output_collection': None,
-
-                        }
+                        sample_state['status'] = 'error'
                 elif sample_state['status'] == 'complete':
                     # TODO: do nothing
                     pass
