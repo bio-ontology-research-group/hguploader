@@ -84,10 +84,11 @@ def validate_metadata(metadata_file):
 @ck.option('--sequence-read1', '-sr1', required=True, help='FASTQ File (*.fastq.gz) read 1')
 @ck.option('--sequence-read2', '-sr2', help='FASTQ File (*.fastq.gz) read 2')
 @ck.option('--bed-file', '-bf', help='BED file for exome uploads')
+@ck.option('--bed-file-grch37', '-bf37', help='Orignial BED file with assembly version GRCh37(hg19) for exome uploads')
 @ck.option('--metadata-file', '-m', required=True, help='METADATA File')
 @ck.option('--no-sync', '-ns', is_flag=True)
 @ck.option('--upload-id', '-ui', help="Upload object id")
-def main(uploader_project, sequence_read1, sequence_read2, bed_file,
+def main(uploader_project, sequence_read1, sequence_read2, bed_file, bed_file_grch37,
          metadata_file, no_sync, upload_id):
     if not validate_metadata(metadata_file):
         return
@@ -109,6 +110,8 @@ def main(uploader_project, sequence_read1, sequence_read2, bed_file,
     if bed_file is not None:
         is_exome = True
         upload_file(col, bed_file, 'variant_regions.bed')
+        if bed_file_grch37:
+            upload_file(col, bed_file_grch37, 'variant_regions_grch37.bed')
     
     upload_file(col, metadata_file, 'metadata.yaml')
     sample_id = metadata['id']
