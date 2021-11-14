@@ -6,7 +6,7 @@ web interface. You can use it to upload the genomes of SARS-CoV-2
 samples to make them publicly and freely available to other
 researchers.
 
-To get started, first [install the uploader](#installation), and use the `cborguploader` command to [upload your data](#usage).
+To get started, first [install the uploader](#installation), and use the `hguploader` command to [upload your data](#usage).
 
 # Installation
 
@@ -35,13 +35,13 @@ Note that you will need to repeat the `. venv/bin/activate` step from this direc
 Install from git:
 
 ```sh
-pip3 install git+https://github.com/bio-ontology-research-group/cborguploader.git@master
+pip3 install git+https://github.com/bio-ontology-research-group/hguploader.git@master
 ```
 
 4. **Test the tool.** Try running:
 
 ```sh
-cborguploader --help
+hguploader --help
 ```
 
 It should print some instructions about how to use the uploader.
@@ -62,7 +62,7 @@ sudo apt install -y virtualenv git libcurl4-openssl-dev build-essential python3-
 2. **Install the tool.** You can run:
 
 ```sh
-pip3 install --user git+https://github.com/bio-ontology-research-group/cborguploader.git@master
+pip3 install --user git+https://github.com/bio-ontology-research-group/hguploader.git@master
 ```
 
 3. **Make sure the tool is on your `PATH`.** The `pip3` command will install the uploader in `.local/bin` inside your home directory. Your shell may not know to look for commands there by default. To fix this for the terminal you currently have open, run:
@@ -80,7 +80,7 @@ echo 'export PATH=$PATH:$HOME/.local/bin' >>~/.bashrc
 4. **Test the tool.** Try running:
 
 ```sh
-cborguploader --help
+hguploader --help
 ```
 
 It should print some instructions about how to use the uploader.
@@ -99,8 +99,8 @@ sudo apt install -y virtualenv git libcurl4-openssl-dev build-essential python3-
 2. **Clone and enter the repository.** You can run:
 
 ```sh
-git clone https://github.com/bio-ontology-research-group/cborguploader.git
-cd cborguploader
+git clone https://github.com/bio-ontology-research-group/hguploader.git
+cd hguploader
 ```
 
 3. **Create and enter a virtualenv.** Go to some memorable directory and make and enter a virtualenv:
@@ -121,7 +121,7 @@ pip3 install -e .
 5. **Test the tool.** Try running:
 
 ```sh
-cborguploader --help
+hguploader --help
 ```
 
 It should print some instructions about how to use the uploader.
