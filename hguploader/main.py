@@ -81,14 +81,27 @@ def validate_metadata(metadata_file):
 @ck.option(
     '--uploader-project', '-up', required=True,
     help='FASTQ sequences project uuid')
-@ck.option('--sequence-read1', '-sr1', required=True, help='FASTQ File (*.fastq.gz) read 1')
-@ck.option('--sequence-read2', '-sr2', help='FASTQ File (*.fastq.gz) read 2')
-@ck.option('--bed-file', '-bf', help='BED file for exome uploads')
-@ck.option('--bed-file-grch37', '-bf37', help='Orignial BED file with assembly version GRCh37(hg19) for exome uploads')
+@ck.option('--sequence-read1', '-sr1', required=True, help='Patient\'s FASTQ File (*.fastq.gz) read 1')
+@ck.option('--sequence-read2', '-sr2', help='Patient\'s FASTQ File (*.fastq.gz) read 2')
+@ck.option('--bed-file', '-bf', help='Patient\'s BED file for exome uploads')
+@ck.option('--bed-file-grch37', '-bf37', help='Patient\'s Orignial BED file with assembly version GRCh37(hg19) for exome uploads')
+
+@ck.option('--father-sequence-read1', '-fsr1', required=True, help='Father\'s FASTQ File (*.fastq.gz) read 1')
+@ck.option('--father-sequence-read2', '-fsr2', help='Father\'s FASTQ File (*.fastq.gz) read 2')
+@ck.option('--father-bed-file', '-fbf', help='Father\'s BED file for exome uploads')
+@ck.option('--father-bed-file-grch37', '-fbf37', help='Father\'s orignial BED file with assembly version GRCh37(hg19) for exome uploads')
+
+@ck.option('--mother-sequence-read1', '-msr1', help='Mother\'s FASTQ File (*.fastq.gz) read 1')
+@ck.option('--mother-sequence-read2', '-msr2', help='Mother\'s FASTQ File (*.fastq.gz) read 2')
+@ck.option('--mother-bed-file', '-mbf', help='Mother\'s BED file for exome uploads')
+@ck.option('--mother-bed-file-grch37', '-mbf37', help='Mother\'s Orignial BED file with assembly version GRCh37(hg19) for exome uploads')
+
 @ck.option('--metadata-file', '-m', required=True, help='METADATA File')
 @ck.option('--no-sync', '-ns', is_flag=True)
 @ck.option('--upload-id', '-ui', help="Upload object id")
 def main(uploader_project, sequence_read1, sequence_read2, bed_file, bed_file_grch37,
+        father_sequence_read1, father_sequence_read2, father_bed_file, father_bed_file_grch37,
+        mother_sequence_read1, mother_sequence_read2, mother_bed_file, mother_bed_file_grch37,
          metadata_file, no_sync, upload_id):
     if not validate_metadata(metadata_file):
         return
@@ -112,6 +125,39 @@ def main(uploader_project, sequence_read1, sequence_read2, bed_file, bed_file_gr
         upload_file(col, bed_file, 'variant_regions.bed')
         if bed_file_grch37:
             upload_file(col, bed_file_grch37, 'variant_regions_grch37.bed')
+
+
+    is_father_exome = False
+    is_father_paired = False
+    if father_sequence_read1 is not None:
+        validate_fastq(father_sequence_read1)
+        upload_file(col, father_sequence_read1, 'father_reads1.fastq.gz')
+        if father_sequence_read2 is not None:
+            validate_fastq(father_sequence_read2)
+            upload_file(col, father_sequence_read2, 'father_reads2.fastq.gz')
+            is_father_paired = True
+
+    if father_bed_file is not None:
+        is_father_exome = True
+        upload_file(col, father_bed_file, 'father_variant_regions.bed')
+        if father_bed_file_grch37:
+            upload_file(col, father_bed_file_grch37, 'father_ariant_regions_grch37.bed')
+
+    is_mother_exome = False
+    is_mother_paired = False
+    if mother_sequence_read1 is not None:
+        validate_fastq(mother_sequence_read1)
+        upload_file(col, mother_sequence_read1, 'mother_reads1.fastq.gz')
+        if mother_sequence_read2 is not None:
+            validate_fastq(mother_sequence_read2)
+            upload_file(col, mother_sequence_read2, 'mother_reads2.fastq.gz')
+            is_mother_paired = True
+
+    if mother_bed_file is not None:
+        is_mother_exome = True
+        upload_file(col, mother_bed_file, 'mother_variant_regions.bed')
+        if mother_bed_file_grch37:
+            upload_file(col, mother_bed_file_grch37, 'mother_ariant_regions_grch37.bed')
     
     upload_file(col, metadata_file, 'metadata.yaml')
     sample_id = metadata['id']
@@ -121,7 +167,11 @@ def main(uploader_project, sequence_read1, sequence_read2, bed_file, bed_file_gr
         "id": sample_id,
         "upload_app": "hguploader",
         "is_exome": is_exome,
-        "is_paired": is_paired
+        "is_paired": is_paired,
+        "is_father_exome": is_father_exome,
+        "is_father_paired": is_father_paired,
+        "is_mother_exome": is_mother_exome,
+        "is_mother_paired": is_mother_paired
     }
 
     col.save_new(
@@ -136,6 +186,10 @@ def main(uploader_project, sequence_read1, sequence_read2, bed_file, bed_file_gr
             'col_uuid': col_uuid,
             'is_exome': is_exome,
             'is_paired': is_paired,
+            "is_father_exome": is_father_exome,
+            "is_father_paired": is_father_paired,
+            "is_mother_exome": is_mother_exome,
+            "is_mother_paired": is_mother_paired,
             'status': 'uploaded'
         }
         # Synchronize the upload on the web
