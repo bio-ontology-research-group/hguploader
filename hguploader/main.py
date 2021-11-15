@@ -96,13 +96,14 @@ def validate_metadata(metadata_file):
 @ck.option('--mother-bed-file', '-mbf', help='Mother\'s BED file for exome uploads')
 @ck.option('--mother-bed-file-grch37', '-mbf37', help='Mother\'s Orignial BED file with assembly version GRCh37(hg19) for exome uploads')
 
+@ck.option('--pedigree-file', '-pf', help='Description of the familial relationships between samples.')
 @ck.option('--metadata-file', '-m', required=True, help='METADATA File')
 @ck.option('--no-sync', '-ns', is_flag=True)
 @ck.option('--upload-id', '-ui', help="Upload object id")
 def main(uploader_project, sequence_read1, sequence_read2, bed_file, bed_file_grch37,
         father_sequence_read1, father_sequence_read2, father_bed_file, father_bed_file_grch37,
         mother_sequence_read1, mother_sequence_read2, mother_bed_file, mother_bed_file_grch37,
-         metadata_file, no_sync, upload_id):
+        pedigree_file, metadata_file, no_sync, upload_id):
     if not validate_metadata(metadata_file):
         return
     metadata = yaml.load(open(metadata_file), Loader=yaml.FullLoader)
@@ -159,6 +160,7 @@ def main(uploader_project, sequence_read1, sequence_read2, bed_file, bed_file_gr
         if mother_bed_file_grch37:
             upload_file(col, mother_bed_file_grch37, 'mother_ariant_regions_grch37.bed')
     
+    upload_file(col, pedigree_file, 'pedigree.ped')
     upload_file(col, metadata_file, 'metadata.yaml')
     sample_id = metadata['id']
     if upload_id:
