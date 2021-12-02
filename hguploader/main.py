@@ -184,7 +184,7 @@ def main(uploader_project, sequence_read1, sequence_read2, bed_file, bed_file_gr
     
     upload_file(col, pedigree_file, 'pedigree.ped')
     upload_file(col, metadata_file, 'metadata.yaml')
-    sample_id = metadata['identifier']
+    sample_id = str(metadata['id']) + '_' + metadata['patient']['identifier']
     if upload_id:
         sample_id += f'_{upload_id}'
     properties = {
