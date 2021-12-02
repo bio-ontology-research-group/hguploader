@@ -110,8 +110,8 @@ def main(uploader_project, sequence_read1, sequence_read2, bed_file, bed_file_gr
         mother_sequence_read1, mother_sequence_read2, mother_bed_file, mother_bed_file_grch37,
         sibling_sequence_read1, sibling_sequence_read2, sibling_bed_file, sibling_bed_file_grch37,
         pedigree_file, metadata_file, no_sync, upload_id):
-    if not validate_metadata(metadata_file):
-        return
+    # if not validate_metadata(metadata_file):
+    #     return
     metadata = yaml.load(open(metadata_file), Loader=yaml.FullLoader)
     api = arvados.api('v1', host=ARVADOS_API_HOST, token=ARVADOS_API_TOKEN)
     col = arvados.collection.Collection(api_client=api, num_retries=5)
