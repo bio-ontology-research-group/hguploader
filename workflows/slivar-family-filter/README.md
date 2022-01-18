@@ -1,4 +1,4 @@
-slivar: filter/annotate variants in VCF/BCF format with simple expressions Build Status
+## slivar: filter/annotate variants in VCF/BCF format with simple expressions Build Status
 
 To run the workflow, please follow the steps below:
 
@@ -9,5 +9,6 @@ To run the workflow, please follow the steps below:
 3. Prepare the inplut files as shown in the example yaml file (slivar.yaml)[https://raw.githubusercontent.com/bio-ontology-research-group/hguploader/master/workflows/slivar-family-filter/slivar.yaml] 
 
 4. run the workflow as follows:
-
-   cwl-runner slivar.cwl slivar.yaml 
+	```
+	cwl-runner slivar.cwl slivar.yaml 
+	```
