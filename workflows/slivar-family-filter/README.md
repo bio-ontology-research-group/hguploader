@@ -6,7 +6,7 @@ To run the workflow, please follow the steps below:
 
 2. Download the required input files to run [slivar](https://github.com/brentp/slivar) from [Gnotation Files](https://github.com/brentp/slivar#gnotation-files)
 
-3. Prepare the inplut files as shown in the example yaml file (slivar.yaml)[https://raw.githubusercontent.com/bio-ontology-research-group/hguploader/master/workflows/slivar-family-filter/slivar.yaml] 
+3. Prepare the inplut files as shown in the example yaml file [slivar.yaml](https://raw.githubusercontent.com/bio-ontology-research-group/hguploader/master/workflows/slivar-family-filter/slivar.yam)
 
 4. run the workflow as follows:
 	```
