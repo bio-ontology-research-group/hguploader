@@ -1,4 +1,4 @@
-## slivar: filter/annotate variants in VCF/BCF format with simple expressions Build Status
+## slivar: filter/annotate variants in VCF format
 
 To run the workflow, please follow the steps below:
 
