@@ -1,0 +1,23 @@
+## set these variables
+path_data: 
+  class: Directory
+  location: '/ibex/scratch/althagat/uploader/'
+vcf_file: 
+  class: File
+  path: 'emc10_test.vcf.gz'
+ped_file: 
+  class: File
+  path: 'pedigree.ped'
+fasta_file: 
+  class: File
+  path: '/ibex/reference/KSL/hg38/Homo_sapiens_assembly38.fasta'
+gff_file: 
+  class: File
+  path: 'Homo_sapiens_ch.gff3_chr.vcf'
+gnomad_file: 
+  class: File
+  path: 'gnomad.hg38.genomes.v3.fix.zip'  
+js_file: 
+  class: File
+  path: 'slivar-functions.js'  
+output_file: 'sliver_output_cwl.vcf'
