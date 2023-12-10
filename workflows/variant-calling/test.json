@@ -1,0 +1,21 @@
+{
+    "reads1": {
+        "class": "File",
+        "location": "/home/kulmanm/data/NIST1p_R1.fastq.gz"},
+    "reads2": {
+        "class": "File",
+        "location": "/home/kulmanm/data/NIST1p_R2.fastq.gz"},
+    "ref": {
+        "class": "File",
+        "location": "/home/kulmanm/data/hg38.fa",
+        "secondaryFiles": [
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.fai"
+            }
+        ]
+    },
+    "ref_index": {
+        "class": "File",
+        "location": "/home/kulmanm/data/hg38.mmi"}
+}

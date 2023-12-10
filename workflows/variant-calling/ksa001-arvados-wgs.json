@@ -1,0 +1,39 @@
+{
+    "model_type": "WGS",
+    "reads1": {
+        "class": "File",
+        "location": "keep:4c3526a91bbcebbc6dcf185afe15fafe+542/NIST-small_R1.fastq.gz"},
+    "reads2": {
+        "class": "File",
+        "location": "keep:4c3526a91bbcebbc6dcf185afe15fafe+542/NIST-small_R2.fastq.gz"},
+    "ref": {
+        "class": "File",
+        "location": "keep:fa4bb958098eaf2e9c5da7e37ff44a2b+12784/ksa001.1.fa",
+        "secondaryFiles": [
+            {
+                "class": "File",
+                "location": "keep:fa4bb958098eaf2e9c5da7e37ff44a2b+12784/ksa001.1.fa.fai"
+            },
+            {
+                "class": "File",
+                "location": "keep:fa4bb958098eaf2e9c5da7e37ff44a2b+12784/ksa001.1.fa.pac"
+            },
+            {
+                "class": "File",
+                "location": "keep:fa4bb958098eaf2e9c5da7e37ff44a2b+12784/ksa001.1.fa.ann"
+            },
+            {
+                "class": "File",
+                "location": "keep:fa4bb958098eaf2e9c5da7e37ff44a2b+12784/ksa001.1.fa.amb"
+            },
+            {
+                "class": "File",
+                "location": "keep:fa4bb958098eaf2e9c5da7e37ff44a2b+12784/ksa001.1.fa.0123"
+            },
+            {
+                "class": "File",
+                "location": "keep:fa4bb958098eaf2e9c5da7e37ff44a2b+12784/ksa001.1.fa.bwt.2bit.64"
+            },
+      ]
+    },
+}

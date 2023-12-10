@@ -1,0 +1,27 @@
+{
+    "model_type": "WES",
+    "ref": {
+        "class": "File",
+        "location": "/home/kulmanm/data/hg38.fa",
+        "secondaryFiles": [
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.fai"
+            }
+        ]
+    },
+    "regions": {
+        "class": "File",
+        "location": "/home/kulmanm/data/hglft_genome_4a46c_ca1130.bed"
+    },
+    "aligned_reads": {
+        "class": "File",
+        "location": "/home/kulmanm/data/aligned_reads.cram",
+        "secondaryFiles": [
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/aligned_reads.cram.crai"
+            }
+        ]
+    }
+}

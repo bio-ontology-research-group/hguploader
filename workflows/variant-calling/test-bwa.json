@@ -1,0 +1,38 @@
+{
+    "reads1": {
+        "class": "File",
+        "location": "/home/kulmanm/data/NIST1p_R1.fastq.gz"},
+    "reads2": {
+        "class": "File",
+        "location": "/home/kulmanm/data/NIST1p_R2.fastq.gz"},
+    "ref": {
+        "class": "File",
+        "location": "/home/kulmanm/data/hg38.fa",
+        "secondaryFiles": [
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.fai"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.pac"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.ann"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.amb"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.0123"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.bwt.2bit.64"
+            },
+        ]
+    },
+}

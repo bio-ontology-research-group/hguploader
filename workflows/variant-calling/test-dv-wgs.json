@@ -1,0 +1,23 @@
+{
+    "model_type": "WGS",
+    "ref": {
+        "class": "File",
+        "location": "/home/kulmanm/data/hg38.fa",
+        "secondaryFiles": [
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.fai"
+            }
+        ]
+    },
+    "aligned_reads": {
+        "class": "File",
+        "location": "/home/kulmanm/data/aligned_reads.cram",
+        "secondaryFiles": [
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/aligned_reads.cram.crai"
+            }
+        ]
+    }
+}

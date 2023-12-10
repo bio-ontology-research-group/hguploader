@@ -1,0 +1,47 @@
+{
+    "model_type": "WES",
+    "regions": {
+        "class": "File",
+        "location": "/home/kulmanm/data/idt_capture_novogene.grch38.bed"
+    },
+
+    "reads1": {
+        "class": "File",
+        "location": "/home/kulmanm/data/D2_S2_L001_R1_004.fastq.gz"},
+    "reads2": {
+        "class": "File",
+        "location": "/home/kulmanm/data/D2_S2_L001_R2_004.fastq.gz"},
+    "ref": {
+        "class": "File",
+        "location": "/home/kulmanm/data/hg38.fa",
+        "secondaryFiles": [
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.fai"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.pac"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.ann"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.amb"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.0123"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/hg38.fa.bwt.2bit.64"
+            },
+      ]
+    },
+    "ref_index": {
+        "class": "File",
+        "location": "/home/kulmanm/data/hg38.mmi"}
+}

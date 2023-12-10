@@ -1,0 +1,47 @@
+{
+    "model_type": "WES",
+    "regions": {
+        "class": "File",
+        "location": "/home/kulmanm/data/ksa001.1v1.0.0_hglft_genome_1b2f2_78e460.bed"
+    },
+
+    "reads1": {
+        "class": "File",
+        "location": "/home/kulmanm/data/NIST1p_R1.fastq.gz"},
+    "reads2": {
+        "class": "File",
+        "location": "/home/kulmanm/data/NIST1p_R2.fastq.gz"},
+    "output_cram": "NIST1p.cram",
+    "output_vcf": "NIST1p.vcf",
+    "output_gcvf": "NIST1p.gvcf",
+    "ref": {
+        "class": "File",
+        "location": "/home/kulmanm/data/ksa001.1.fa",
+        "secondaryFiles": [
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/ksa001.1.fa.fai"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/ksa001.1.fa.pac"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/ksa001.1.fa.ann"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/ksa001.1.fa.amb"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/ksa001.1.fa.0123"
+            },
+            {
+                "class": "File",
+                "location": "/home/kulmanm/data/ksa001.1.fa.bwt.2bit.64"
+            },
+      ]
+    },
+}
