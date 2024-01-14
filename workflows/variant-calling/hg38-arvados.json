@@ -1,0 +1,57 @@
+{
+  "model_type": "WES",
+  "regions": {
+    "class": "File",
+    "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hglft_genome_1b2f2_78e460.bed"
+  },
+  "reads1": {
+    "class": "File",
+    "location": "keep:4c3526a91bbcebbc6dcf185afe15fafe+542/NIST-small_R1.fastq.gz"
+  },
+  "reads2": {
+    "class": "File",
+    "location": "keep:4c3526a91bbcebbc6dcf185afe15fafe+542/NIST-small_R2.fastq.gz"
+  },
+  "ref": {
+    "class": "File",
+    "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa",
+    "secondaryFiles": [
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.0123"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.amb"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.ann"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.bwt.2bit.64"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.fai"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.gz"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.gz.fai"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.pac"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.mmi"
+      }
+    ]
+  }
+}
