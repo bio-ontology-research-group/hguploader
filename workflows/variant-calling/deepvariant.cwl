@@ -7,7 +7,7 @@ requirements:
     dockerPull: "google/deepvariant:1.6.0"
   ResourceRequirement:
     coresMin: 64
-    ramMin: $(64 * 1024)
+    ramMin: $(96 * 1024)
 baseCommand: /opt/deepvariant/bin/run_deepvariant
 
 inputs:
