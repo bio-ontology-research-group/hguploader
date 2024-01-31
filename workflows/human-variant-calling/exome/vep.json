@@ -1,0 +1,10 @@
+{
+    "dir": {
+        "class": "Directory",
+        "path": "/home/kulmanm/KAUST/CBRC/hguploader/data/vep_data"
+    },
+    "input_file": {
+        "class": "File",
+        "path": "test.vcf"
+    }
+}
