@@ -7,8 +7,9 @@ requirements:
 baseCommand: slivar
 arguments: [expr, 
 # --js, $(inputs.slivar_function),
+# --ped, $(inputs.slivar_ped),
  -g, $(inputs.slivar_gnomad),
-  --vcf, $(inputs.slivar_input), --ped, $(inputs.slivar_ped), 
+  --vcf, $(inputs.slivar_input),
   --info, $(inputs.slivar_info), --pass-only]
 
 inputs:
@@ -18,8 +19,8 @@ inputs:
     type: File
   slivar_input:
     type: File
-  slivar_ped:
-    type: File
+  #slivar_ped:
+  #  type: File
   slivar_info:
     type: string
 

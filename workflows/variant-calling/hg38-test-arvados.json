@@ -56,33 +56,29 @@
   },
   "slivar_gnomad": {
     "class": "File",
-    "location": "keep:d33a6f1f8c37d0341a0e8d28f5980b4a+2919/gnomad.hg38.genomes.v3.fix.zip"
-  },
-  "slivar_ped": {
-    "class": "File",
-    "location": "??????????????"
+    "location": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/gnomad.hg38.genomes.v3.fix.zip"
   },
   "slivar_info": "INFO.gnomad_popmax_af < 0.01 && variant.FILTER == 'PASS'",
   "vep_assembly": "GRCh38",
   "vep_output_file": "vep-output.vcf",
   "pavs_custom_file": {
     "class": "File",
-    "path": "keep:d33a6f1f8c37d0341a0e8d28f5980b4a+2919/sorted.pavs.plugin.38.vcf.gz"
+    "path": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/sorted.pavs.plugin.38.vcf.gz"
   },
   "pavs_custom_args": "PAVS,vcf,exact",
   "go_custom_file": {
     "class": "File",
-    "path": "keep:d33a6f1f8c37d0341a0e8d28f5980b4a+2919/sorted.plugin.go.bed.gz"
+    "path": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/sorted.plugin.go.bed.gz"
   },
   "go_custom_args": "GO_CLASSES,bed,overlap",
   "hpo_custom_file": {
     "class": "File",
-    "path": "keep:d33a6f1f8c37d0341a0e8d28f5980b4a+2919/sorted.plugin.pheno.bed.gz"
+    "path": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/sorted.plugin.pheno.bed.gz"
   },
   "hpo_custom_args": "PHENOTYPE,bed,overlap",
   "ppi_custom_file": {
     "class": "File",
-    "path": "keep:d33a6f1f8c37d0341a0e8d28f5980b4a+2919/sorted.plugin.ppi.bed.gz"
+    "path": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/sorted.plugin.ppi.bed.gz"
   },
   "ppi_custom_args": "PPI,bed,overlap",
   "vep_dir": {

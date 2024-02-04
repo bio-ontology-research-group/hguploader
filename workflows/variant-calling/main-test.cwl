@@ -19,7 +19,7 @@ inputs:
   output_vcf: string?
   output_gvcf: string?
   slivar_gnomad: File
-  slivar_ped: File
+  # slivar_ped: File
   slivar_info: string
   vep_assembly: string
   vep_output_file: string
@@ -46,6 +46,9 @@ outputs:
   output_gvcf:
     type: File
     outputSource: deepvariant/gvcf
+  output_slivar:
+    type: File
+    outputSource: slivar/slivar_output
   output_after_vep:
     type: File
     outputSource: vep/vep_output
@@ -85,7 +88,7 @@ steps:
     in:
       slivar_gnomad: slivar_gnomad
       slivar_input: deepvariant/vcf
-      slivar_ped: slivar_ped
+    #  slivar_ped: slivar_ped
       slivar_info: slivar_info
     out: [slivar_output]
     run: slivar.cwl
