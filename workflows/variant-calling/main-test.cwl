@@ -33,7 +33,6 @@ inputs:
   ppi_custom_args: string
   vep_dir: Directory
 
-
 outputs:
   aligned_reads:
     type: File
@@ -96,7 +95,7 @@ steps:
       vep_assembly: vep_assembly
       vep_output_file: vep_output_file
       pavs_custom_file: pavs_custom_file
-      pavs_custom_args:pavs_custom_args
+      pavs_custom_args: pavs_custom_args
       go_custom_file: go_custom_file
       go_custom_args: go_custom_args
       hpo_custom_file: hpo_custom_file
