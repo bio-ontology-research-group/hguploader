@@ -1,0 +1,88 @@
+{
+  "model_type": "WES",
+  "regions": {
+    "class": "File",
+    "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hglft_genome_1b2f2_78e460.bed"
+  },
+  "reads1": {
+    "class": "File",
+    "location": "keep:4c3526a91bbcebbc6dcf185afe15fafe+542/NIST-small_R1.fastq.gz"
+  },
+  "reads2": {
+    "class": "File",
+    "location": "keep:4c3526a91bbcebbc6dcf185afe15fafe+542/NIST-small_R2.fastq.gz"
+  },
+  "ref": {
+    "class": "File",
+    "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa",
+    "secondaryFiles": [
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.0123"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.amb"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.ann"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.bwt.2bit.64"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.fai"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.gz"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.gz.fai"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.pac"
+      },
+      {
+        "class": "File",
+        "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.mmi"
+      }
+    ]
+  },
+  "slivar_gnomad": {
+    "class": "File",
+    "location": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/gnomad.hg38.genomes.v3.fix.zip"
+  },
+  "slivar_info": "INFO.gnomad_popmax_af < 0.01 && variant.FILTER == 'PASS'",
+  "vep_assembly": "GRCh38",
+  "vep_output_file": "vep-output.vcf",
+  "pavs_custom_file": {
+    "class": "File",
+    "path": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/sorted.pavs.plugin.38.vcf.gz"
+  },
+  "pavs_custom_args": "PAVS,vcf,exact",
+  "go_custom_file": {
+    "class": "File",
+    "path": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/sorted.plugin.go.bed.gz"
+  },
+  "go_custom_args": "GO_CLASSES,bed,overlap",
+  "hpo_custom_file": {
+    "class": "File",
+    "path": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/sorted.plugin.pheno.bed.gz"
+  },
+  "hpo_custom_args": "PHENOTYPE,bed,overlap",
+  "ppi_custom_file": {
+    "class": "File",
+    "path": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/sorted.plugin.ppi.bed.gz"
+  },
+  "ppi_custom_args": "PPI,bed,overlap",
+  "vep_dir": {
+    "class": "Directory",
+    "path": "keep:ed620a5a2bdf6cb09b171c3219699562+542550"
+  }
+}
