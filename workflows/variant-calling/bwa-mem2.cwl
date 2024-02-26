@@ -12,7 +12,7 @@ baseCommand: bwa-mem2
 arguments: [mem, -t, $(runtime.cores), $(inputs.ref), $(inputs.reads1), $(inputs.reads2),
             {shellQuote: false, valueFrom: '|'},
             samtools, fixmate, -u, -m, -, -,
-            {shellQuote: false, valueFrom: '|'},
+            {shellQuote: false, vaxlueFrom: '|'},
             samtools, sort, -u, -@8, -T, /tmp/readsPrefix,  -,
             {shellQuote: false, valueFrom: '|'},
             samtools, markdup, -@16, --reference, $(inputs.ref), -, $(inputs.output_cram)

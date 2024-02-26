@@ -46,6 +46,10 @@ inputs:
     type: File?
     inputBinding:
       prefix: --regions
+  extra_args:
+    type: string?
+    inputBinding:
+      prefix: --make_examples_extra_args
 
 outputs:
   vcf:
