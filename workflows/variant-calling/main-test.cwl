@@ -33,7 +33,7 @@ inputs:
   ppi_custom_args: string
   vep_dir: Directory
   vep_fasta_file: File
-  input_metadata_file: File
+  metadata: File
   starvar_option: string
   starvar_output_file: string
   starvar_input_files:
@@ -122,7 +122,7 @@ steps:
     run: vep.cwl
   phenofrommetadata:
     in:
-      input_metadata_file: input_metadata_file
+      metadata: metadata
     out: [pheno_output]
     run: phenofrommetadata.cwl
   starvar:

@@ -8,7 +8,7 @@ requirements:
   DockerRequirement:
     dockerPull: 'dunglam2k/phenofrommetadata:v1.01'
 inputs:
-  input_metadata_file:
+  metadata:
     type: File
     inputBinding:
       position: 1
