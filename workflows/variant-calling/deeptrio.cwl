@@ -29,13 +29,13 @@ inputs:
       - .crai
     inputBinding:
       prefix: --reads
-  aligned_reads_parent1:
+  parent1_aligned_reads:
     type: File
     secondaryFiles:
       - .crai
     inputBinding:
       prefix: --reads_parent1
-  aligned_reads_parent2:
+  parent2_aligned_reads:
     type: File
     secondaryFiles:
       - .crai
@@ -59,14 +59,14 @@ inputs:
     default: variants.vcf
     inputBinding:
       prefix: --output_vcf
-  output_vcf_parent1:
+  parent1_output_vcf:
     type: string
-    default: variants_parent1.vcf
+    default: parent1_variants.vcf
     inputBinding:
       prefix: --output_vcf_parent1
-  output_vcf_parent2:
+  parent2_output_vcf:
     type: string
-    default: variants_parent2.vcf
+    default: parent2_variants.vcf
     inputBinding:
       prefix: --output_vcf_parent2
   
@@ -75,14 +75,14 @@ inputs:
     default: variants.gvcf
     inputBinding:
       prefix: --output_gvcf
-  output_gvcf_parent1:
+  parent1_output_gvcf:
     type: string
-    default: variants_parent1.gvcf
+    default: parent1_variants.gvcf
     inputBinding:
       prefix: --output_gvcf_parent1
-  output_gvcf_parent2:
+  parent2_output_gvcf:
     type: string
-    default: variants_parent2.gvcf
+    default: parent2_variants.gvcf
     inputBinding:
       prefix: --output_gvcf_parent2
 
@@ -101,23 +101,23 @@ outputs:
     type: File
     outputBinding:
       glob: $(inputs.output_vcf)
-  vcf_parent1:
+  parent1_vcf:
     type: File
     outputBinding:
-      glob: $(inputs.output_vcf_parent1)
-  vcf_parent2:
+      glob: $(inputs.parent1_output_vcf)
+  parent2_vcf:
     type: File
     outputBinding:
-      glob: $(inputs.output_vcf_parent2)
+      glob: $(inputs.parent2_output_vcf)
   gvcf:
     type: File
     outputBinding:
       glob: $(inputs.output_gvcf)
-  gvcf_parent1:
+  parent1_gvcf:
     type: File
     outputBinding:
-      glob: $(inputs.output_gvcf_parent1)
-  gvcf_parent2:
+      glob: $(inputs.parent1_output_gvcf)
+  parent2_gvcf:
     type: File
     outputBinding:
-      glob: $(inputs.output_gvcf_parent2)
+      glob: $(inputs.parent2_output_gvcf)
