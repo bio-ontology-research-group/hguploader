@@ -3,7 +3,7 @@
     "class": "File",
     "path": "./vep-out-hgvs.vcf"
   },
-  "starvar_output_file": "starvar-output.txt",
+  "starvar_output_file": "starvar-output.cvf",
   "starvar_option": "v",
   "starvar_pheno": "\"HP:0000805\"",
   "starvar_input_files": [

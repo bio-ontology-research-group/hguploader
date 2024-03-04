@@ -90,7 +90,7 @@
     "path": "keep:fdf9c2c82fa16bd2202839ccb9898d0d+888/fastafile"
   },
   "starvar_option": "v",
-  "starvar_output_file": "starvar-output.txt",
+  "starvar_output_file": "starvar-output.vcf",
   "starvar_input_files": [
     {
       "class": "File",
