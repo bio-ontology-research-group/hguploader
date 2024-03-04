@@ -1,0 +1,75 @@
+{
+  "starvar_input": {
+    "class": "File",
+    "path": "./vep-out-hgvs.vcf"
+  },
+  "starvar_output_file": "starvar-output.txt",
+  "starvar_option": "v",
+  "starvar_pheno": "\"HP:0000805\"",
+  "starvar_input_files": [
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/gpcards_ALDOB.vep.vcf"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/GPCards_SyntheticDataset.tsv"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/hgnc2uniprot.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/Lit.model.sav"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/Lit.Poly.model.sav"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/Lit.Sift.model.sav"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/Lit.VC.model.sav"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/merged.hpo2pmid.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:54b806014840a110d91cfa6e576fa555+501/out.gene.symbol_pmid.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/out.rs_pmid.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/out.uniprot_pmid.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/PAVS_SyntheticData.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/synthetic_ALDOB.maf001.AR.vcf"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/var_con_weights.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/var_type_weights.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/VEP_AnnotFields"
+    }
+  ]
+}

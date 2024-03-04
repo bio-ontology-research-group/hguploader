@@ -23,8 +23,8 @@ inputs:
       prefix: '-assembly'
   vep_output_file:
     type: string
-  #vep_fasta_file:
-  #  type: File
+  vep_fasta_file:
+    type: File
   pavs_custom_file:
     type: File
     secondaryFiles:
@@ -55,7 +55,7 @@ inputs:
 
 outputs:
   vep_console_out: stdout
-  vep_output: 
+  vep_output:
     type: File
     outputBinding:
       glob: $(inputs.vep_output_file)
@@ -84,18 +84,19 @@ arguments:
   #  prefix: --cache_version
   - '--symbol'
   - '--transcript_version'
-  - '--tsl' 
-  - '--numbers'  
-  - '--check_existing' 
-  #- '--hgvs' 
-  #- valueFrom: $(inputs.vep_fasta_file)
-  #  prefix: --fasta
+  - '--tsl'
+  - '--numbers'
+  - '--check_existing'
+  - '--hgvs'
+  - valueFrom: $(inputs.vep_fasta_file)
+    prefix: --fasta
   - '--biotype'
-  - '--cache' 
-  - '--tab' 
-  - '--no_stats' 
-  - '--af' 
-  - '--af_gnomad' 
+  - '--cache'
+  - '--tab'
+  - '--no_stats'
+  - '--af'
+  - '--af_gnomad'
   - '--canonical'
+  #- '--most_severe'
   - valueFrom: $(inputs.vep_output_file)
     prefix: --output_file   

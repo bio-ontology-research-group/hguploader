@@ -32,6 +32,14 @@ inputs:
   ppi_custom_file: File
   ppi_custom_args: string
   vep_dir: Directory
+  vep_fasta_file: File
+  input_metadata_file: File
+  starvar_option: string
+  starvar_output_file: string
+  starvar_input_files:
+    type:
+      type: array
+      items: File
 
 outputs:
   aligned_reads:
@@ -52,6 +60,9 @@ outputs:
   output_after_vep:
     type: File
     outputSource: vep/vep_output
+  output_after_starvar:
+    type: File
+    outputSource: starvar/starvar_output
 
 steps:
   bwa-mem2:
@@ -106,6 +117,21 @@ steps:
       ppi_custom_file: ppi_custom_file
       ppi_custom_args: ppi_custom_args
       vep_dir: vep_dir
+      vep_fasta_file: vep_fasta_file
     out: [vep_console_out, vep_output]
     run: vep.cwl
+  phenofrommetadata:
+    in:
+      input_metadata_file: input_metadata_file
+    out: [pheno_output]
+    run: phenofrommetadata.cwl
+  starvar:
+    in:
+      starvar_input: [vep/vep_output]
+      starvar_option: starvar_option
+      starvar_output_file: starvar_output_file
+      starvar_pheno: [phenofrommetadata/pheno_output]
+      starvar_input_files: starvar_input_files
+    out: [starvar_output]
+    run: starvar.cwl
 
