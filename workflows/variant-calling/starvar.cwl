@@ -10,7 +10,7 @@ requirements:
         #writable: true
   InlineJavascriptRequirement: {}
   DockerRequirement:
-    dockerPull: 'dunglam2k/starvar:v1.01'
+    dockerPull: 'dunglam2k/starvar:v1.04'
   ResourceRequirement:
     coresMin: 64
     ramMin: $(96 * 1024)

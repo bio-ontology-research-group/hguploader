@@ -49,5 +49,108 @@
         "location": "keep:ad5aa0c0a79c1c799a485f3176f54b78+19765/hg38.fa.mmi"
       }
     ]
-  }
+  },
+  "slivar_gnomad": {
+    "class": "File",
+    "location": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/gnomad.hg38.genomes.v3.fix.zip"
+  },
+  "slivar_info": "INFO.gnomad_popmax_af < 0.01 && variant.FILTER == 'PASS'",
+  "vep_assembly": "GRCh38",
+  "vep_output_file": "vep-output.vcf",
+  "pavs_custom_file": {
+    "class": "File",
+    "path": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/sorted.pavs.plugin.38.vcf.gz"
+  },
+  "pavs_custom_args": "PAVS,vcf,exact",
+  "go_custom_file": {
+    "class": "File",
+    "path": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/sorted.plugin.go.bed.gz"
+  },
+  "go_custom_args": "GO_CLASSES,bed,overlap",
+  "hpo_custom_file": {
+    "class": "File",
+    "path": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/sorted.plugin.pheno.bed.gz"
+  },
+  "hpo_custom_args": "PHENOTYPE,bed,overlap",
+  "ppi_custom_file": {
+    "class": "File",
+    "path": "keep:ec0963941c30e17700ae771ec0cb0ff9+3240/sorted.plugin.ppi.bed.gz"
+  },
+  "ppi_custom_args": "PPI,bed,overlap",
+  "vep_dir": {
+    "class": "Directory",
+    "path": "keep:ed620a5a2bdf6cb09b171c3219699562+542550"
+  },
+  "vep_fasta_file": {
+    "class": "File",
+    "path": "keep:fdf9c2c82fa16bd2202839ccb9898d0d+888/fastafile"
+  },
+  "starvar_option": "v",
+  "starvar_output_file": "starvar-output.vcf",
+  "starvar_input_files": [
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/gpcards_ALDOB.vep.vcf"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/GPCards_SyntheticDataset.tsv"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/hgnc2uniprot.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/Lit.model.sav"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/Lit.Poly.model.sav"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/Lit.Sift.model.sav"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/Lit.VC.model.sav"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/merged.hpo2pmid.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:54b806014840a110d91cfa6e576fa555+501/out.gene.symbol_pmid.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/out.rs_pmid.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/out.uniprot_pmid.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/PAVS_SyntheticData.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/synthetic_ALDOB.maf001.AR.vcf"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/var_con_weights.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/var_type_weights.txt"
+    },
+    {
+      "class": "File",
+      "path": "keep:39d464c52e22dba6f6f1a3f4d7cf956a+1794/VEP_AnnotFields"
+    }
+  ]
 }

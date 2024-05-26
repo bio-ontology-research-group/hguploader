@@ -19,6 +19,6 @@ outputs:
     outputBinding:
       glob: phenofile.txt
       loadContents: true
-      outputEval: $(self[0].contents)
+      outputEval: ${ return '\"' + self[0].contents + '\"'; }
 
 stdout: phenofile.txt
