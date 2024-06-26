@@ -13,7 +13,7 @@ requirements:
     dockerPull: 'dunglam2k/starvar:v1.04'
   ResourceRequirement:
     coresMin: 64
-    ramMin: $(96 * 1024)
+    ramMin: $(160 * 1024)
   NetworkAccess:
     networkAccess: true
 inputs:

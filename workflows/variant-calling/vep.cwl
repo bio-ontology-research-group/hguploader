@@ -6,7 +6,7 @@ baseCommand:
 requirements:
   InlineJavascriptRequirement: {}
   DockerRequirement:
-    dockerPull: 'ensemblorg/ensembl-vep:latest'
+    dockerPull: 'ensemblorg/ensembl-vep:release_102.0'
   ResourceRequirement:
     coresMin: 64
     ramMin: $(64 * 1024)

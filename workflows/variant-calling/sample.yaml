@@ -1,0 +1,39 @@
+id: 124
+patient:
+  phenotypes:
+  - phenotype:
+      uri: http://purl.obolibrary.org/obo/CL_2000016
+      label: lung microvascular endothelial cell
+    excluded: false
+  - phenotype:
+      uri: http://purl.obolibrary.org/obo/UBERON_0008836
+      label: liver bud
+    excluded: false
+  pedigree:
+    father: null
+    mother: null
+    sister: null
+    brother: null
+  age: 23
+  identifier: ID3000
+  mrn: null
+  first_name: Dung
+  last_name: Lam
+  full_name: Dung Lam
+  gender: male
+  date_of_birth: '2000-05-03'
+  created_at: '2024-03-04T01:46:43.091590Z'
+  updated_at: '2024-03-04T01:46:43.091596Z'
+  created_by: 12
+  modified_by: 12
+is_trio: false
+date: '2024-03-04T01:47:19.746409Z'
+col_uuid: null
+portable_data_hash: null
+container_request: null
+status: submitted
+error_message: null
+updated_at: '2024-03-04T01:47:19.746820Z'
+phenotypes_snapshot: null
+pedigree_snapshot: null
+user: 12
