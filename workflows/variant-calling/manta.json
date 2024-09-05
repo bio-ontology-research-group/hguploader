@@ -1,0 +1,24 @@
+{
+    "ref": {
+        "class": "File",
+        "location": "reference/GRCh38_no_alt_analysis_set.fasta",
+        "secondaryFiles": [
+            {
+                "class": "File",
+                "location": "reference/GRCh38_no_alt_analysis_set.fasta.fai"
+            }
+        ]
+    },
+    "aligned_reads": {
+        "class": "File",
+        "location": "input/HG003.novaseq.wes_idt.100x.dedup.bam",
+        "secondaryFiles": [
+            {
+                "class": "File",
+                "location": "input/HG003.novaseq.wes_idt.100x.dedup.bam.bai"
+            }
+        ]
+    },
+
+    "run_dir": "manta_results"
+}
