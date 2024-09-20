@@ -1,0 +1,165 @@
+{
+    "model_type": "WGS",
+    "manta_run_dir": "manta_results",
+    "reads1": {
+      "class": "File",
+      "location": "keep:b4a8fbf918d6744687ac1b775456ca79+536/NIST-small_R1.fastq.gz"
+    },
+    "reads2": {
+      "class": "File",
+      "location": "keep:b4a8fbf918d6744687ac1b775456ca79+536/NIST-small_R2.fastq.gz"
+    },
+    "metadata":{
+      "class": "File",
+      "location": "keep:3c9215d6f3acbd11de88305e3187dfc0+57/sample.yaml"
+    },
+    "ref": {
+      "class": "File",
+      "location": "keep:6263294a8066d11b4976ea44e3ea6ea3+19884/hg38.fa",
+      "secondaryFiles": [
+        {
+          "class": "File",
+          "location": "keep:6263294a8066d11b4976ea44e3ea6ea3+19884/hg38.fa.0123"
+        },
+        {
+          "class": "File",
+          "location": "keep:6263294a8066d11b4976ea44e3ea6ea3+19884/hg38.fa.amb"
+        },
+        {
+          "class": "File",
+          "location": "keep:6263294a8066d11b4976ea44e3ea6ea3+19884/hg38.fa.ann"
+        },
+        {
+          "class": "File",
+          "location": "keep:6263294a8066d11b4976ea44e3ea6ea3+19884/hg38.fa.bwt.2bit.64"
+        },
+        {
+          "class": "File",
+          "location": "keep:6263294a8066d11b4976ea44e3ea6ea3+19884/hg38.fa.fai"
+        },
+        {
+          "class": "File",
+          "location": "keep:6263294a8066d11b4976ea44e3ea6ea3+19884/hg38.fa.gz"
+        },
+        {
+          "class": "File",
+          "location": "keep:6263294a8066d11b4976ea44e3ea6ea3+19884/hg38.fa.gz.gzi"
+        },
+        {
+          "class": "File",
+          "location": "keep:6263294a8066d11b4976ea44e3ea6ea3+19884/hg38.fa.gz.fai"
+        },
+        {
+          "class": "File",
+          "location": "keep:6263294a8066d11b4976ea44e3ea6ea3+19884/hg38.fa.pac"
+        },
+        {
+          "class": "File",
+          "location": "keep:6263294a8066d11b4976ea44e3ea6ea3+19884/hg38.fa.mmi"
+        }
+      ]
+    },
+    "slivar_gnomad": {
+      "class": "File",
+      "location": "keep:148bcb74e5d8268ac486d315e657f70b+3240/gnomad.hg38.genomes.v3.fix.zip"
+    },
+    "slivar_info": "INFO.gnomad_popmax_af < 0.01 && variant.FILTER == 'PASS'",
+    "vep_assembly": "GRCh38",
+    "vep_output_file": "vep-output.vcf",
+    "pavs_custom_file": {
+      "class": "File",
+      "path": "keep:148bcb74e5d8268ac486d315e657f70b+3240/sorted.pavs.plugin.38.vcf.gz"
+    },
+    "pavs_custom_args": "PAVS,vcf,exact",
+    "go_custom_file": {
+      "class": "File",
+      "path": "keep:148bcb74e5d8268ac486d315e657f70b+3240/sorted.plugin.go.bed.gz"
+    },
+    "go_custom_args": "GO_CLASSES,bed,overlap",
+    "hpo_custom_file": {
+      "class": "File",
+      "path": "keep:148bcb74e5d8268ac486d315e657f70b+3240/sorted.plugin.pheno.bed.gz"
+    },
+    "hpo_custom_args": "PHENOTYPE,bed,overlap",
+    "ppi_custom_file": {
+      "class": "File",
+      "path": "keep:148bcb74e5d8268ac486d315e657f70b+3240/sorted.plugin.ppi.bed.gz"
+    },
+    "ppi_custom_args": "PPI,bed,overlap",
+    "vep_dir": {
+      "class": "Directory",
+      "path": "keep:ed620a5a2bdf6cb09b171c3219699562+542550"
+    },
+    "vep_fasta_file": {
+      "class": "File",
+      "path": "keep:00528ccfa8b07fd08907077b1f4fe3e9+927/fastafile"
+    },
+    "starvar_option": "v",
+    "starvar_output_file": "starvar-output.vcf",
+    "starvar_input_files": [
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/gpcards_ALDOB.vep.vcf"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/GPCards_SyntheticDataset.tsv"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/hgnc2uniprot.txt"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/Lit.model.sav"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/Lit.Poly.model.sav"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/Lit.Sift.model.sav"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/Lit.VC.model.sav"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/merged.hpo2pmid.txt"
+      },
+      {
+        "class": "File",
+        "path": "keep:54b806014840a110d91cfa6e576fa555+501/out.gene.symbol_pmid.txt"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/out.rs_pmid.txt"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/out.uniprot_pmid.txt"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/PAVS_SyntheticData.txt"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/synthetic_ALDOB.maf001.AR.vcf"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/var_con_weights.txt"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/var_type_weights.txt"
+      },
+      {
+        "class": "File",
+        "path": "keep:6cda61340102257b2965a4e6b6e4fe7f+1811/VEP_AnnotFields"
+      }
+    ]
+  }
